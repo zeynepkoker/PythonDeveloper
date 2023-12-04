@@ -37,7 +37,7 @@ def Pagination(source_url, start_page_number, end_page_number):
         url = f'{source_url}page/{start_page_number}/'
         response = requests.get(url)
         if response.status_code == 200:
-            soup = BeautifulSoup(response.content, 'html.parser', from_encoding="iso-8859-1")
+            soup = BeautifulSoup(response.content, 'html.parser')
             elements_with_class = soup.find_all('a', class_=post_class)
             for element in elements_with_class:
                 each_url = element['href']
@@ -100,7 +100,7 @@ def eachNewsFromHTML(each_url):
     temp_matrix = []
 
     if each_response.status_code == 200:
-        each_soup = BeautifulSoup(each_response.content, 'html.parser', from_encoding="iso-8859-1")
+        each_soup = BeautifulSoup(each_response.content, 'html.parser')
         temp_matrix.append(each_url)
         header_name = each_soup.find('h1', class_=header_class).text
         temp_matrix.append(header_name)
